@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<h2>Edit Profile</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <p>
+        {{ form.profile_image.label_tag }}<br>
+        {{ form.profile_image }}<br>
+        {% if profile.profile_image %}
+            Currently: <img src="{{ profile.profile_image.url }}" alt="Current Image" width="100">
+        {% endif %}
+    </p>
+
+    <p>
+        {{ form.location.label_tag }}<br>
+        {{ form.location }}
+    </p>
+
+    <p>
+        {{ form.latitude.label_tag }}<br>
+        {{ form.latitude }}
+    </p>
+
+    <p>
+        {{ form.longitude.label_tag }}<br>
+        {{ form.longitude }}
+    </p>
+
+    <button type="submit">Save</button>
+</form>
+{% endblock %}

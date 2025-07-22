@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Profile of {{ profile_user.username }}{% endblock %}
+
+{% block content %}
+<h2>Profile: {{ profile_user.username }}</h2>
+<img src="{{ profile.profile_image.url }}" alt="Profile Image" style="max-width: 200px;">
+{% if user == profile_user %}
+    <p><a href="{% url 'edit_profile' %}">Edit your profile</a></p>
+{% endif %}
+{% endblock %}

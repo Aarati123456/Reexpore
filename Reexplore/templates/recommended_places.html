@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Recommended Places{% if location %} near {{ location }}{% endif %}</h2>
+
+<form method="get">
+    <label>Filter by Category:</label>
+    <select name="category">
+        <option value="">All</option>
+        {% for key, label in categories.items %}
+            <option value="{{ key }}" {% if key == request.GET.category %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<ul>
+    {% for place in places %}
+        <li>
+            <h3>{{ place.name }} ({{ place.get_category_display }})</h3>
+            <p>{{ place.description }}</p>
+            <p><strong>Location:</strong> {{ place.location }}</p>
+            {% if place.image %}
+                <img src="{{ place.image.url }}" alt="{{ place.name }}" style="width:200px;">
+            {% endif %}
+        </li>
+    {% empty %}
+        <li>No places found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
